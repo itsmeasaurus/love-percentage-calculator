@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Percentage Calculator</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Love Percentage Calculator" />
+    <meta
+      property="og:description"
+      content="Find your playful compatibility score and share it with friends."
+    />
+    <meta property="og:url" content="https://lovecalculator.dailychronicle.dev" />
+    <meta
+      property="og:image"
+      content="https://lovecalculator.dailychronicle.dev/social-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Love Percentage Calculator" />
+    <meta
+      name="twitter:description"
+      content="Find your playful compatibility score and share it with friends."
+    />
+    <meta
+      name="twitter:image"
+      content="https://lovecalculator.dailychronicle.dev/social-preview.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="min-h-screen romantic-bg text-slate-800">
+    <div class="floating-hearts" aria-hidden="true">
+      <span>💖</span>
+      <span>❤️</span>
+      <span>💘</span>
+      <span>💕</span>
+      <span>💗</span>
+      <span>💝</span>
+    </div>
+
+    <main class="min-h-screen flex items-center justify-center px-4 py-8">
+      <section class="w-full max-w-xl">
+        <div class="card-shell rounded-3xl shadow-2xl p-5 sm:p-8">
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-rose-700">
+            Love Percentage Calculator
+          </h1>
+          <p class="text-center text-slate-600 mt-2">
+            Enter two names and discover your playful compatibility score.
+          </p>
+
+          <form id="loveForm" class="mt-6 space-y-4">
+            <div>
+              <label for="name1" class="block text-sm font-semibold mb-1">Your Name</label>
+              <input
+                id="name1"
+                type="text"
+                required
+                class="w-full rounded-xl border border-rose-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-rose-300"
+                placeholder="e.g. Alex"
+              />
+            </div>
+
+            <div>
+              <label for="name2" class="block text-sm font-semibold mb-1">Partner Name</label>
+              <input
+                id="name2"
+                type="text"
+                required
+                class="w-full rounded-xl border border-rose-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-rose-300"
+                placeholder="e.g. Taylor"
+              />
+            </div>
+
+            <button
+              id="calculateBtn"
+              type="submit"
+              class="w-full rounded-xl bg-rose-600 hover:bg-rose-700 text-white py-3 text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
+            >
+              Calculate Love
+            </button>
+
+            <p id="feedback" class="min-h-6 text-sm text-center font-medium"></p>
+          </form>
+
+          <article id="resultContainer" class="hidden mt-6">
+            <div id="shareCard" class="rounded-2xl bg-white/95 p-5 sm:p-6 shadow-lg border border-rose-100">
+              <p class="text-center text-lg sm:text-xl font-bold text-rose-600">❤️ Love Score ❤️</p>
+              <p class="mt-4 text-center text-base sm:text-lg font-semibold text-slate-700">
+                <span id="resultName1"></span>
+                <span class="mx-1 text-rose-500">+</span>
+                <span id="resultName2"></span>
+              </p>
+
+              <p
+                id="scoreValue"
+                class="mt-4 text-center text-6xl sm:text-7xl font-extrabold text-rose-600 heart-beat"
+              >
+                0%
+              </p>
+
+              <p id="messageValue" class="mt-4 text-center text-base sm:text-lg font-semibold text-slate-700"></p>
+              <p class="mt-5 text-center text-xs sm:text-sm text-slate-500">
+                Try this on lovecalculator.dailychronicle.dev
+              </p>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                id="downloadBtn"
+                type="button"
+                class="rounded-xl bg-slate-800 hover:bg-slate-900 text-white py-3 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+              >
+                Download PNG
+              </button>
+              <button
+                id="shareBtn"
+                type="button"
+                class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white py-3 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Share on Facebook
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
