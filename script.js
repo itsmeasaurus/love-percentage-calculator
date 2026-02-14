@@ -17,6 +17,12 @@ const PUBLIC_SHARE_URL = "https://lovecalculator.dailychronicle.dev/";
 
 let latestResult = null;
 
+function trackEvent(eventName, params = {}) {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+  }
+}
+
 function normalizeName(name) {
   return name.trim().toLowerCase();
 }
@@ -128,6 +134,11 @@ loveForm.addEventListener("submit", async (event) => {
   // Brief delay for playful loading feedback.
   setTimeout(async () => {
     await renderResult(name1, name2, score);
+    trackEvent("calculate_love", {
+      name1_length: name1.length,
+      name2_length: name2.length,
+      love_score: score
+    });
     setFeedback("Result is ready! Scroll down to download or share.", "success");
 
     calculateBtn.disabled = false;
@@ -151,6 +162,9 @@ downloadBtn.addEventListener("click", async () => {
     anchor.href = imageDataUrl;
     anchor.download = getSafeFileName();
     anchor.click();
+    trackEvent("download_png", {
+      love_score: latestResult.score
+    });
 
     setFeedback("PNG downloaded successfully.", "success");
   } catch (error) {
@@ -171,5 +185,8 @@ shareBtn.addEventListener("click", () => {
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
 
   window.open(facebookShareUrl, "_blank", "noopener,noreferrer");
+  trackEvent("share_facebook", {
+    love_score: latestResult.score
+  });
   setFeedback("If the preview image looks outdated, refresh Facebook cache with Sharing Debugger.", "info");
 });
