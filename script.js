@@ -13,7 +13,7 @@ const messageValue = document.getElementById("messageValue");
 const downloadBtn = document.getElementById("downloadBtn");
 const shareBtn = document.getElementById("shareBtn");
 const shareCard = document.getElementById("shareCard");
-const PUBLIC_SHARE_URL = "https://lovecalculator.dailychronicle.dev";
+const PUBLIC_SHARE_URL = "https://lovecalculator.dailychronicle.dev/";
 
 let latestResult = null;
 
@@ -77,19 +77,6 @@ function animateScore(targetScore) {
 
     requestAnimationFrame(tick);
   });
-}
-
-function isPublicWebUrl(url) {
-  try {
-    const parsed = new URL(url);
-    const host = parsed.hostname;
-    const isHttp = parsed.protocol === "http:" || parsed.protocol === "https:";
-    const isLocalHost = host === "localhost" || host === "127.0.0.1" || host === "::1";
-
-    return isHttp && !isLocalHost;
-  } catch (error) {
-    return false;
-  }
 }
 
 async function generateShareCanvas() {
@@ -179,18 +166,9 @@ shareBtn.addEventListener("click", () => {
   }
 
   const shareText = `${latestResult.name1} + ${latestResult.name2} = ${latestResult.score}%! ${latestResult.message}`;
-  const currentUrl = window.location.href;
-  const shareUrl = isPublicWebUrl(currentUrl) ? currentUrl : PUBLIC_SHARE_URL;
+  const shareUrl = PUBLIC_SHARE_URL;
 
-  if (shareUrl !== currentUrl) {
-    setFeedback("Local URL detected. Sharing your public site URL instead.", "info");
-  }
-
-  const facebookShareUrl =
-    "https://www.facebook.com/sharer/sharer.php?u=" +
-    encodeURIComponent(shareUrl) +
-    "&quote=" +
-    encodeURIComponent(shareText);
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
 
   window.open(facebookShareUrl, "_blank", "noopener,noreferrer");
   setFeedback("If the preview image looks outdated, refresh Facebook cache with Sharing Debugger.", "info");
